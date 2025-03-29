@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartContext';
 import { ShoppingCart, ChevronLeft, Minus, Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { categories } from '@/data/constants';
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
