@@ -1,3 +1,4 @@
+
 export interface Product {
   id: string;
   name: string;
@@ -36,6 +37,7 @@ export interface Address {
 export interface Order {
   id: string;
   userId: string;
+  phone?: string;  // Added phone field for notifications
   items: OrderItem[];
   totalAmount: number;
   paymentMethod: PaymentMethod;

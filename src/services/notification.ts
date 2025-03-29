@@ -23,7 +23,7 @@ export const notificationService = {
           },
           {
             name: '📞 Contact',
-            value: `Phone: ${order.billingAddress?.phone || 'N/A'}`
+            value: `Phone: ${order.phone || 'N/A'}`
           },
           {
             name: '🏠 Delivery Address',
@@ -76,7 +76,7 @@ export const notificationService = {
 🎉 *NEW ORDER #${order.id}*
 
 👤 *Customer*: ${order.userId}
-📞 *Contact*: ${order.billingAddress?.phone || 'N/A'}
+📞 *Contact*: ${order.phone || 'N/A'}
 
 🏠 *Delivery Address*:
 ${order.deliveryAddress.street},
