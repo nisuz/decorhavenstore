@@ -1,5 +1,5 @@
 
-import { Product, Category, Order, User } from '../types';
+import { Product, Category, Order, User, PaymentMethod } from '../types';
 import { products, categories } from '../data/mockData';
 
 // In a real application, these would be actual API calls
@@ -119,13 +119,43 @@ export const api = {
   },
 
   // Payment processing (mock)
-  processPayment: async (method: string, amount: number): Promise<boolean> => {
+  processPayment: async (method: PaymentMethod, amount: number): Promise<boolean> => {
     return new Promise((resolve) => {
       // Simulate payment processing
       console.log(`Processing ${amount} via ${method}`);
       // 95% success rate for demo purposes
       const success = Math.random() < 0.95;
       setTimeout(() => resolve(success), 800);
+    });
+  },
+  
+  // Verify payment status (mock)
+  verifyPayment: async (transactionId: string): Promise<{
+    verified: boolean;
+    method: PaymentMethod;
+    amount: number;
+  }> => {
+    return new Promise((resolve) => {
+      // Extract payment method from transaction ID format
+      const methodMatch = transactionId.match(/^([A-Z]+)-\d+$/);
+      let method: PaymentMethod = 'cod';
+      
+      if (methodMatch) {
+        const prefix = methodMatch[1].toLowerCase();
+        if (prefix === 'esewa') method = 'esewa';
+        else if (prefix === 'khalti') method = 'khalti';
+        else if (prefix === 'connectips') method = 'connectips';
+        else if (prefix === 'card') method = 'card';
+        else if (prefix === 'banking') method = 'banking';
+      }
+      
+      setTimeout(() => {
+        resolve({
+          verified: Math.random() < 0.95,
+          method,
+          amount: Math.floor(Math.random() * 10000) / 100
+        });
+      }, 500);
     });
   }
 };

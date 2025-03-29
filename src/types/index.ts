@@ -1,4 +1,3 @@
-
 export interface Product {
   id: string;
   name: string;
@@ -39,11 +38,12 @@ export interface Order {
   userId: string;
   items: OrderItem[];
   totalAmount: number;
-  paymentMethod: 'cod' | 'card' | 'esewa' | 'khalti' | 'banking';
-  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'canceled';
+  paymentMethod: PaymentMethod;
+  status: OrderStatus;
   billingAddress: Address;
   deliveryAddress: Address;
   createdAt: string;
+  transactionId?: string;
 }
 
 export interface OrderItem {
@@ -53,4 +53,5 @@ export interface OrderItem {
   quantity: number;
 }
 
-export type PaymentMethod = 'cod' | 'card' | 'esewa' | 'khalti' | 'banking';
+export type PaymentMethod = 'cod' | 'card' | 'esewa' | 'khalti' | 'banking' | 'connectips';
+export type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'canceled';
