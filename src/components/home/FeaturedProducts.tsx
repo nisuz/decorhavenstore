@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Product } from '@/types';
 import { api } from '@/services/api';
@@ -96,6 +95,7 @@ export function FeaturedProducts() {
                   size="sm" 
                   className="w-full"
                   onClick={() => handleAddToCart(product)}
+                  type="button"
                 >
                   <ShoppingCart className="h-4 w-4 mr-2" /> Add to Cart
                 </Button>

@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 // Define the cart item type
 export interface CartItem {
@@ -30,6 +30,9 @@ const CartContext = createContext<CartContextType>({
   getTotalPrice: () => 0,
 });
 
+// Local storage key for cart
+const CART_STORAGE_KEY = 'decorhaven-cart';
+
 // Props type for the provider
 interface CartProviderProps {
   children: ReactNode;
@@ -37,7 +40,16 @@ interface CartProviderProps {
 
 // Cart provider component
 export function CartProvider({ children }: CartProviderProps) {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    // Initialize from localStorage if available
+    const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));
+  }, [cartItems]);
 
   // Add an item to the cart
   const addToCart = (item: Omit<CartItem, 'quantity'>) => {

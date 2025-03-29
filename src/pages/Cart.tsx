@@ -68,6 +68,7 @@ const Cart = () => {
                         <button 
                           className="text-sm text-muted-foreground hover:text-destructive flex items-center mt-1"
                           onClick={() => handleRemove(item.id, item.name)}
+                          type="button"
                         >
                           <Trash2 className="h-3 w-3 mr-1" /> Remove
                         </button>
@@ -87,6 +88,7 @@ const Cart = () => {
                           size="icon" 
                           className="h-8 w-8"
                           onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
+                          type="button"
                         >
                           <Minus className="h-3 w-3" />
                         </Button>
@@ -96,6 +98,7 @@ const Cart = () => {
                           size="icon" 
                           className="h-8 w-8"
                           onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+                          type="button"
                         >
                           <Plus className="h-3 w-3" />
                         </Button>

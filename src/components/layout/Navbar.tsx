@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -88,7 +87,7 @@ export function Navbar() {
           )}
           
           <Link to="/cart" className="relative">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" aria-label="Shopping cart">
               <ShoppingCart className="h-5 w-5" />
               {cartItemCount > 0 && (
                 <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-xs text-white flex items-center justify-center">
