@@ -3,7 +3,7 @@ import React from 'react';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { PaymentMethod } from '@/types';
-import { CreditCard, DollarSign, Phone, Smartphone, Bank } from 'lucide-react';
+import { CreditCard, DollarSign, Phone, Smartphone, Building } from 'lucide-react';
 
 interface PaymentMethodOption {
   value: PaymentMethod;
@@ -41,7 +41,7 @@ const PaymentMethodSelector = ({ value, onChange }: PaymentMethodSelectorProps) 
     { 
       value: 'connectips', 
       label: 'Connect IPS', 
-      icon: <Bank className="h-4 w-4" /> 
+      icon: <Building className="h-4 w-4" /> 
     },
     { 
       value: 'banking', 

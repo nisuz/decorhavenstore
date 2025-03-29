@@ -17,6 +17,7 @@ import OrderConfirmation from "./pages/OrderConfirmation";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminDashboard from "./pages/admin/Dashboard";
+import NotificationSettingsPage from "./pages/admin/NotificationSettings";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => (
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
                 <Route path="admin/dashboard" element={<AdminDashboard />} />
+                <Route path="admin/notifications" element={<NotificationSettingsPage />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>

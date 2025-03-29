@@ -1,5 +1,6 @@
 
 import { PaymentGateway, PaymentResponse } from './index';
+import { api } from '../api';
 
 export const esewaGateway: PaymentGateway = {
   processPayment: async (amount: number, metadata?: Record<string, any>): Promise<PaymentResponse> => {

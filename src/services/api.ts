@@ -1,9 +1,15 @@
 
 import { Product, Category, Order, User, PaymentMethod } from '../types';
 import { products, categories } from '../data/mockData';
+import { notificationService } from './notification';
 
 // In a real application, these would be actual API calls
 // For now, we'll use mock data and setTimeout to simulate API latency
+
+// Configuration for notifications (in a real app, these would come from environment variables)
+const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/your-webhook-url'; // Replace with actual webhook in production
+const TELEGRAM_BOT_TOKEN = 'your-telegram-bot-token'; // Replace with actual bot token in production
+const TELEGRAM_CHAT_ID = 'your-chat-id'; // Replace with actual chat ID in production
 
 export const api = {
   // Product endpoints
@@ -59,7 +65,7 @@ export const api = {
       // In a real application, we would send this to a server
       console.log('Order created:', newOrder);
       
-      // Send notification to Discord/Telegram (simulated)
+      // Send notification to Discord/Telegram
       api.sendOrderNotification(newOrder);
       
       setTimeout(() => resolve(newOrder), 600);
@@ -68,8 +74,32 @@ export const api = {
 
   // Notification endpoints
   sendOrderNotification: async (order: Order): Promise<void> => {
-    // In a real application, this would send a webhook to Discord or Telegram
     console.log('Sending notification for order:', order);
+    
+    // Send to Discord if webhook URL is configured
+    if (DISCORD_WEBHOOK_URL && !DISCORD_WEBHOOK_URL.includes('your-webhook-url')) {
+      notificationService.sendToDiscord(order, DISCORD_WEBHOOK_URL)
+        .then(success => {
+          console.log(`Discord notification ${success ? 'sent successfully' : 'failed'}`);
+        })
+        .catch(error => {
+          console.error('Discord notification error:', error);
+        });
+    }
+    
+    // Send to Telegram if bot token and chat ID are configured
+    if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID && 
+        !TELEGRAM_BOT_TOKEN.includes('your-telegram-bot') && 
+        !TELEGRAM_CHAT_ID.includes('your-chat-id')) {
+      notificationService.sendToTelegram(order, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID)
+        .then(success => {
+          console.log(`Telegram notification ${success ? 'sent successfully' : 'failed'}`);
+        })
+        .catch(error => {
+          console.error('Telegram notification error:', error);
+        });
+    }
+    
     return Promise.resolve();
   },
 
