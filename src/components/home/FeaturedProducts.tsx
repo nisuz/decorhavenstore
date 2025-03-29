@@ -7,11 +7,13 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartContext';
 import { ShoppingCart } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 export function FeaturedProducts() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
+  const { toast } = useToast();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -34,6 +36,11 @@ export function FeaturedProducts() {
       name: product.name,
       price: product.price,
       image: product.images[0],
+    });
+    
+    toast({
+      title: "Added to cart",
+      description: `${product.name} added to your cart.`,
     });
   };
 

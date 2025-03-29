@@ -7,7 +7,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/context/CartContext';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Filter, ChevronDown } from 'lucide-react';
+import { ShoppingCart, Filter } from 'lucide-react';
 import { 
   Select, 
   SelectContent, 
@@ -24,6 +24,7 @@ import {
   Checkbox 
 } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
 
 const Shop = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -33,6 +34,7 @@ const Shop = () => {
   const [filterOpen, setFilterOpen] = useState(false);
   
   const { addToCart } = useCart();
+  const { toast } = useToast();
   
   const category = searchParams.get('category') || '';
   const sort = searchParams.get('sort') || 'default';
@@ -91,6 +93,11 @@ const Shop = () => {
       name: product.name,
       price: product.price,
       image: product.images[0],
+    });
+    
+    toast({
+      title: "Added to cart",
+      description: `${product.name} added to your cart.`,
     });
   };
   
@@ -247,6 +254,7 @@ const Shop = () => {
                       size="sm" 
                       className="w-full"
                       onClick={() => handleAddToCart(product)}
+                      type="button"
                     >
                       <ShoppingCart className="h-4 w-4 mr-2" /> Add to Cart
                     </Button>
